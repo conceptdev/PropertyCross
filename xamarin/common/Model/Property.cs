@@ -14,7 +14,7 @@ namespace PropertyCross.Model
       Guid = (string)jsonProperty["guid"];
       Price = (int)jsonProperty["price"];
       PropertyType = (string)jsonProperty["property_type"];
-      Bedrooms = jsonProperty.ToNullableInt("bedroom_number");
+			Bedrooms = jsonProperty.ToNullableInt("bedroom_number");
       Bathrooms = jsonProperty.ToNullableInt("bathroom_number");
       Title = (string)jsonProperty["title"];
       ThumbnailUrl = (string)jsonProperty["thumb_url"];

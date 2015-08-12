@@ -6,7 +6,8 @@ namespace PropertyCross.Model
   {
     public static int? ToNullableInt(this JToken token, string propertyName)
     {
-      string value = (string)token[propertyName];
+	var value = token[propertyName].ToString();
+	  
       return string.IsNullOrEmpty(value) ? (int?)null : int.Parse(value);
     }
   }
