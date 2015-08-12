@@ -25,7 +25,8 @@ using Android.Views.Animations;
 
 namespace com.propertycross.xamarin.android.Views
 {
-	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, ScreenOrientation = ScreenOrientation.Portrait)]
+	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, 
+		ScreenOrientation = ScreenOrientation.Portrait)]
 	public class PropertyCrossView : SherlockActivity, PropertyCrossPresenter.View, Android.Widget.TextView.IOnEditorActionListener
 	{
 		private PropertyCrossPresenter presenter;
@@ -56,7 +57,15 @@ namespace com.propertycross.xamarin.android.Views
 
 			SetContentView (Resource.Layout.PropertyCrossView);
 			searchText = (EditText) FindViewById(Resource.Id.search);
-			searchText.TextChanged += SearchText_Changed;
+			searchText.TextChanged += delegate (object sender, EventArgs e)
+			{
+				String searchTerm = searchText.Text;
+				if (searchTerm != null)
+				{
+					searchTerm = searchTerm.Trim();
+					SearchTextChanged(this, new SearchTextChangedEventArgs(searchTerm));
+				}
+			};
 			searchText.SetOnEditorActionListener(this);
 
 			myLocationButton = (Button) FindViewById(Resource.Id.use_location);
@@ -195,15 +204,15 @@ namespace com.propertycross.xamarin.android.Views
 		public event EventHandler<LocationSelectedEventArgs> LocationSelected;		
 		public event EventHandler<RecentSearchSelectedEventArgs> RecentSearchSelected;
 
-		private void SearchText_Changed(object sender, EventArgs e)
-		{
-			String searchTerm = searchText.Text;
-			if (searchTerm != null)
-			{
-				searchTerm = searchTerm.Trim();
-				SearchTextChanged(this, new SearchTextChangedEventArgs(searchTerm));
-			}
-		}
+//		private void SearchText_Changed(object sender, EventArgs e)
+//		{
+//			String searchTerm = searchText.Text;
+//			if (searchTerm != null)
+//			{
+//				searchTerm = searchTerm.Trim();
+//				SearchTextChanged(this, new SearchTextChangedEventArgs(searchTerm));
+//			}
+//		}
 
 		public bool OnEditorAction (TextView v, ImeAction actionId, KeyEvent e)
 		{
