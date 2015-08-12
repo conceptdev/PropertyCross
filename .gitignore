@@ -10,3 +10,4 @@ app.zip
 *.xap
 /neomad/bin
 /neomad/out
+xamarin/android/PropertyCross/Resources/Resource.designer.cs
