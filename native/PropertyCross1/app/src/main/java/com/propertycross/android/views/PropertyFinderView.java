@@ -83,8 +83,8 @@ public class PropertyFinderView extends SherlockActivity implements PropertyFind
         PropertyFinderPersistentState state = stateService.loadState();
 
         setContentView(R.layout.property_finder_view);
-
         searchText = (EditText) findViewById(R.id.search);
+
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {

@@ -43,11 +43,11 @@ namespace com.propertycross.xamarin.android.Views
 			SupportActionBar.Title = Resources.GetString(Resource.String.property_title);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-			priceText = (TextView) FindViewById(Resource.Id.property_price);
-			locationText = (TextView)FindViewById(Resource.Id.property_location);
-			propertyImage = (ImageView) FindViewById(Resource.Id.property_image);
-			overviewText = (TextView) FindViewById(Resource.Id.property_overview);
-			informationText = (TextView) FindViewById(Resource.Id.property_information);
+			priceText = FindViewById<TextView>(Resource.Id.property_price);
+			locationText = FindViewById<TextView>(Resource.Id.property_location);
+			propertyImage = FindViewById<ImageView>(Resource.Id.property_image);
+			overviewText = FindViewById<TextView>(Resource.Id.property_overview);
+			informationText = FindViewById<TextView>(Resource.Id.property_information);
 
 			placeholder = BitmapFactory.DecodeResource(Resources, Resource.Drawable.home);
 

@@ -25,7 +25,8 @@ using Android.Views.Animations;
 
 namespace com.propertycross.xamarin.android.Views
 {
-	[Activity (MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, 
+	[Activity (MainLauncher = true, 
+		WindowSoftInputMode = SoftInput.StateHidden, 
 		ScreenOrientation = ScreenOrientation.Portrait)]
 	public class PropertyCrossView : SherlockActivity, PropertyCrossPresenter.View, Android.Widget.TextView.IOnEditorActionListener
 	{
@@ -51,14 +52,15 @@ namespace com.propertycross.xamarin.android.Views
 
 			var uiMarshal = new MarshalInvokeService(app);
 			var source = new PropertyDataSource(new JsonWebPropertySearch(uiMarshal));
-			geoLocationService = new GeoLocationService((Android.Locations.LocationManager)GetSystemService(Context.LocationService), uiMarshal);
+			geoLocationService = new GeoLocationService(
+					(Android.Locations.LocationManager)GetSystemService(Context.LocationService), uiMarshal);
 			var stateService = new StatePersistenceService(app);
 			PropertyCrossPersistentState state = stateService.LoadState();
 
 			SetContentView (Resource.Layout.PropertyCrossView);
-			searchText = (EditText) FindViewById(Resource.Id.search);
-			searchText.TextChanged += delegate (object sender, EventArgs e)
-			{
+			searchText = FindViewById<EditText>(Resource.Id.search);
+
+			searchText.TextChanged += delegate(object sender, Android.Text.TextChangedEventArgs e) {
 				String searchTerm = searchText.Text;
 				if (searchTerm != null)
 				{
@@ -68,7 +70,7 @@ namespace com.propertycross.xamarin.android.Views
 			};
 			searchText.SetOnEditorActionListener(this);
 
-			myLocationButton = (Button) FindViewById(Resource.Id.use_location);
+			myLocationButton = FindViewById<Button>(Resource.Id.use_location);
 			myLocationButton.Click += LocationButton_Clicked; 
 
 			startSearchButton = (Button) FindViewById(Resource.Id.do_search);
@@ -151,7 +153,7 @@ namespace com.propertycross.xamarin.android.Views
 			if(locations != null)
 			{
 				showLocations();
-				resultsList.Adapter = new AmbiguousLocationsAdapter(this, locations);;
+				resultsList.Adapter = new AmbiguousLocationsAdapter(this, locations);
 			}
 		}
 
